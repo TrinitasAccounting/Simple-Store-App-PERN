@@ -1,16 +1,20 @@
 import { EditIcon, Trash2Icon } from "lucide-react"
 import { Link } from "react-router-dom"
+import { useProductStore } from "../store/useProductStore"
 
 
 
 type Props = {
     key: React.Key | null | undefined,
-    product: any
+    product: any,
+    // deleteProduct: (id: number) => Promise<void>
 }
 
 
 
 export const ProductCard = ({ product }: Props) => {
+
+    const { deleteProduct } = useProductStore();
 
 
     return (
@@ -36,7 +40,10 @@ export const ProductCard = ({ product }: Props) => {
                         <EditIcon className="size-4" />
                     </Link>
 
-                    <button className="btn btn-sm btn-error btn-outline">
+                    <button
+                        className="btn btn-sm btn-error btn-outline"
+                        onClick={() => deleteProduct(product.id)}
+                    >
                         <Trash2Icon className="size-4" />
                     </button>
                 </div>
